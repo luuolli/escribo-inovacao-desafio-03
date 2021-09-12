@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:starwars/src/core/core.dart';
 import 'package:starwars/src/features/films/views/film_list_view.dart';
 import 'package:starwars/src/features/home/components/navigation_item_component.dart';
+import 'package:starwars/src/features/people/views/people_list_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   final pages = [
     FilmListView(),
-    Container(color: StarwarsColors.redFavorite),
+    PeopleListView(),
     Container(color: StarwarsColors.blue),
   ];
 
@@ -97,7 +98,6 @@ class _HomePageState extends State<HomePage> {
               padEnds: false,
               controller: _pageController,
               itemCount: pages.length,
-              onPageChanged: changePage,
               itemBuilder: (context, index) {
                 return pages[index];
               },
