@@ -6,13 +6,13 @@ class FilmsPagination {
   late final int count;
   late final String? nextPageUrl;
   late final String? previousPageUrl;
-  late final List<Film>? movies;
+  late final List<Film>? films;
 
   FilmsPagination({
     required this.count,
     this.nextPageUrl,
     this.previousPageUrl,
-    this.movies,
+    this.films,
   });
 
   factory FilmsPagination.fromMap(Map<String, dynamic> map) {
@@ -20,7 +20,7 @@ class FilmsPagination {
       count: map['count'],
       nextPageUrl: map['next'],
       previousPageUrl: map['previous'],
-      movies:
+      films:
           (map['results'] as List).map((movie) => Film.fromMap(movie)).toList(),
     );
   }
@@ -30,7 +30,7 @@ class FilmsPagination {
 
   @override
   String toString() {
-    return 'MoviesPagination(count: $count, nextPageUrl: $nextPageUrl, previousPageUrl: $previousPageUrl, movies: $movies)';
+    return 'MoviesPagination(count: $count, nextPageUrl: $nextPageUrl, previousPageUrl: $previousPageUrl, films: $films)';
   }
 
   @override
@@ -41,7 +41,7 @@ class FilmsPagination {
         other.count == count &&
         other.nextPageUrl == nextPageUrl &&
         other.previousPageUrl == previousPageUrl &&
-        other.movies == movies;
+        other.films == films;
   }
 
   @override
@@ -49,6 +49,6 @@ class FilmsPagination {
     return count.hashCode ^
         nextPageUrl.hashCode ^
         previousPageUrl.hashCode ^
-        movies.hashCode;
+        films.hashCode;
   }
 }

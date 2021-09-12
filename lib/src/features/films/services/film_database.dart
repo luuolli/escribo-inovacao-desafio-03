@@ -18,7 +18,7 @@ class FilmDatabase {
   FutureOr<void> createTable(sql.Database database, int version) {
     database.execute(
       '''
-          CREATE TABLE IF NOT EXIST $table
+          CREATE TABLE IF NOT EXISTS $table
           (
             id integer primary key,
             title text not null,
@@ -35,7 +35,7 @@ class FilmDatabase {
   FutureOr<void> dropTable(sql.Database database, int verison) {
     return database.execute(
       '''
-        DROP TABLE IF EXIST $table;
+        DROP TABLE IF EXISTS $table;
       ''',
     );
   }
@@ -46,6 +46,7 @@ class FilmDatabase {
     _database = await sql.openDatabase(
       pathJoined,
       onCreate: createTable,
+      version: 1,
     );
   }
 

@@ -39,6 +39,21 @@ mixin _$FilmStore on _FilmStoreBase, Store {
     });
   }
 
+  final _$_filmsAtom = Atom(name: '_FilmStoreBase._films');
+
+  @override
+  ObservableList<Film>? get _films {
+    _$_filmsAtom.reportRead();
+    return super._films;
+  }
+
+  @override
+  set _films(ObservableList<Film>? value) {
+    _$_filmsAtom.reportWrite(value, super._films, () {
+      super._films = value;
+    });
+  }
+
   @override
   String toString() {
     return '''

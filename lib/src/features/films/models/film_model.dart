@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class Film {
   late int id;
-  late final bool isFavorite;
+  bool isFavorite;
   late final String title;
   late final int episodeId;
   late final String openingCrawl;
@@ -14,6 +14,11 @@ class Film {
   int getIdFromUrl() {
     var regexp = RegExp(r'films/(\d+)/');
     return int.parse(regexp.allMatches(url).first.group(1)!);
+  }
+
+  bool toggleFavorite() {
+    isFavorite = !isFavorite;
+    return isFavorite;
   }
 
   Film({

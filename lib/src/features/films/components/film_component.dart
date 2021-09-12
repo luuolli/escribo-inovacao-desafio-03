@@ -4,25 +4,27 @@ import 'package:flutter/material.dart';
 import '../../../core/core.dart';
 
 class FilmWidget extends StatelessWidget {
+  final int id;
   final bool isFavorite;
   final String title;
   final int episodeId;
   final String releaseDate;
-  final Function(bool)? onFavorted;
+  final Function(int id)? onFavorited;
 
   Color? get _favoriteColorSufix =>
-      isFavorite ? StarwarsColors.redFavorite : null;
+      isFavorite ? StarwarsColors.redFavorite : StarwarsColors.greyAccent;
 
   IconData get _favoriteIconSufix =>
       isFavorite ? CupertinoIcons.heart_fill : CupertinoIcons.heart;
 
   const FilmWidget({
     Key? key,
+    required this.id,
     required this.isFavorite,
     required this.title,
     required this.episodeId,
     required this.releaseDate,
-    this.onFavorted,
+    this.onFavorited,
   }) : super(key: key);
 
   @override
@@ -78,8 +80,7 @@ class FilmWidget extends StatelessWidget {
             CupertinoButton(
               padding: EdgeInsets.zero,
               child: Icon(_favoriteIconSufix, color: _favoriteColorSufix),
-              onPressed:
-                  onFavorted != null ? () => onFavorted!(!isFavorite) : null,
+              onPressed: onFavorited != null ? () => onFavorited!(id) : null,
             ),
           ],
         ),

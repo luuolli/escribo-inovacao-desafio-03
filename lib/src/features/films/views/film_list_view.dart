@@ -20,7 +20,9 @@ class _FilmListViewState extends State<FilmListView> {
   @override
   void initState() {
     super.initState();
-    filmStore.fetchFilms();
+    filmStore.fetchFilms().whenComplete(() {
+      filmStore.markFavorites();
+    });
   }
 
   @override
