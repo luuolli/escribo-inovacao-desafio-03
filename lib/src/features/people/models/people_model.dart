@@ -11,6 +11,7 @@ class People {
   late final String birthYear;
   late final String gender;
   late final String url;
+  bool isFavorite;
 
   People({
     required this.name,
@@ -22,6 +23,7 @@ class People {
     required this.birthYear,
     required this.gender,
     required this.url,
+    this.isFavorite = false,
   }) {
     id = getIdFromUrl();
   }

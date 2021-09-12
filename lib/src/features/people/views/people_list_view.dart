@@ -20,7 +20,7 @@ class _PeopleListViewState extends State<PeopleListView> {
   @override
   void initState() {
     super.initState();
-    peopleStore.fetchPeople();
+    peopleStore.fetchPeople().whenComplete(peopleStore.markFavorites);
   }
 
   @override

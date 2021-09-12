@@ -1,5 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:starwars/src/core/core.dart';
+import 'package:starwars/src/features/favorites/controllers/favorite_controller.dart';
 import 'package:starwars/src/features/people/components/people_component.dart';
 import 'package:starwars/src/features/people/models/models.dart';
 import 'package:starwars/src/features/people/repositories/people_repository_interface.dart';
@@ -36,6 +41,46 @@ extension PeopleStoreActions on _PeopleStoreBase {
     );
     _loadingState = ConnectionState.none;
   }
+
+  @action
+  void markFavorites() {
+    if (_peoples == null) return;
+
+    var favoritePeoples = Modular.get<FavoriteStore>()
+        .favorites
+        ?.where((people) => people.type == FavoriteType.people);
+
+    if (favoritePeoples == null || favoritePeoples.isEmpty) {
+      _peoples?.forEach((people) {
+        people.isFavorite = false;
+      });
+    } else {
+      for (var people in favoritePeoples) {
+        _peoples?.firstWhere((element) {
+          return element.id == people.id;
+        }).isFavorite = true;
+      }
+    }
+
+    _peoples = ObservableList.of(_peoples!);
+  }
+
+  @action
+  void markOrUnmarkfavorite(int id) {
+    var people = _peoples?.firstWhere((people) => people.id == id);
+
+    if (people == null) return;
+
+    people.isFavorite = !people.isFavorite;
+
+    if (people.isFavorite) {
+      Modular.get<FavoriteStore>().addPeopleToFavorite(people: people);
+    } else {
+      Modular.get<FavoriteStore>().removePeopleFromFavorite(people: people);
+    }
+
+    _peoples = ObservableList.of(_peoples!);
+  }
 }
 
 extension PeopleStoreComputeds on _PeopleStoreBase {
@@ -45,9 +90,11 @@ extension PeopleStoreComputeds on _PeopleStoreBase {
   @computed
   List<PeopleWidget>? get peopleItemList => _peoples
       ?.map((people) => PeopleWidget(
-            isFavorite: false,
+            id: people.id,
+            isFavorite: people.isFavorite,
             name: people.name,
             year: people.birthYear,
+            onFavorited: markOrUnmarkfavorite,
           ))
       .toList();
 }

@@ -4,21 +4,25 @@ import 'package:flutter/material.dart';
 import '../../../core/core.dart';
 
 class PeopleWidget extends StatelessWidget {
+  final int id;
   final bool isFavorite;
   final String name;
   final String year;
+  final Function(int id)? onFavorited;
 
   Color? get _favoriteColorSufix =>
-      isFavorite ? StarwarsColors.redFavorite : null;
+      isFavorite ? StarwarsColors.redFavorite : StarwarsColors.greyAccent;
 
   IconData get _favoriteIconSufix =>
       isFavorite ? CupertinoIcons.heart_fill : CupertinoIcons.heart;
 
   const PeopleWidget({
     Key? key,
+    required this.id,
     required this.isFavorite,
     required this.name,
     required this.year,
+    this.onFavorited,
   }) : super(key: key);
 
   @override
@@ -60,7 +64,7 @@ class PeopleWidget extends StatelessWidget {
             CupertinoButton(
               padding: EdgeInsets.zero,
               child: Icon(_favoriteIconSufix, color: _favoriteColorSufix),
-              onPressed: null,
+              onPressed: onFavorited != null ? () => onFavorited!(id) : null,
             ),
           ],
         ),
