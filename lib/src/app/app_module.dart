@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:starwars/src/core/core.dart';
 import 'package:starwars/src/features/favorites/controllers/favorite_controller.dart';
 import 'package:starwars/src/features/favorites/services/favorite_database.dart';
+import 'package:starwars/src/features/starwars_webview/views/starwars_web_page.dart';
 
 import '../features/home/home_page.dart';
 
@@ -23,6 +24,12 @@ class AppModule extends Module {
         ChildRoute(
           '/',
           child: (_, __) => HomePage(favoriteStore: Modular.get()),
+          children: [
+            ChildRoute(
+              'starwars-web',
+              child: (_, __) => const StarwarsWebPage(),
+            ),
+          ],
         ),
       ];
 }

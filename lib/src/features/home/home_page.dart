@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../core/core.dart';
 import '../favorites/controllers/favorite_controller.dart';
@@ -71,8 +72,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   expandedHeight: 180,
-                  title: const CupertinoButton(
-                      child: Icon(Icons.public), onPressed: null),
+                  title: CupertinoButton(
+                    padding: EdgeInsets.zero,
+                    child: const Icon(Icons.public),
+                    onPressed: () {
+                      print(Modular.to.path);
+                      Modular.to.pushNamed('starwars-web', forRoot: true);
+                    },
+                  ),
                   actions: const [
                     CupertinoButton(child: Icon(Icons.person), onPressed: null),
                   ],
