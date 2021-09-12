@@ -14,7 +14,7 @@ class AppWidget extends StatelessWidget {
       statusBarColor: Colors.transparent,
     ));
 
-    return const CupertinoApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
     ).modular();

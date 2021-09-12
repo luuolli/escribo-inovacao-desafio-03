@@ -11,5 +11,5 @@ abstract class StarwarsColors {
   static Color get redFavorite => const Color(0xFFB4342C);
   static Color get red => const Color(0xFFB4342C);
   static Color get green => const Color(0xFF80B42C);
-  static Color get blue => const Color(0xFF80B42C);
+  static Color get blue => const Color(0xFF2962BB);
 }
