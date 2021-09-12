@@ -1,1 +1,1 @@
-enum FavoriteType { movie, personage }
+enum FavoriteType { film, people }

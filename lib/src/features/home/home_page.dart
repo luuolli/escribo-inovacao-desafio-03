@@ -2,13 +2,21 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:starwars/src/core/core.dart';
-import 'package:starwars/src/features/films/views/film_list_view.dart';
-import 'package:starwars/src/features/home/components/navigation_item_component.dart';
-import 'package:starwars/src/features/people/views/people_list_view.dart';
+
+import '../../core/core.dart';
+import '../favorites/controllers/favorite_controller.dart';
+import '../favorites/views/favorite_list_view.dart';
+import '../films/views/film_list_view.dart';
+import '../people/views/people_list_view.dart';
+import 'components/navigation_item_component.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final FavoriteStore favoriteStore;
+
+  const HomePage({
+    Key? key,
+    required this.favoriteStore,
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -16,13 +24,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _pageController = PageController();
+
   int activedPage = 0;
 
   final pages = [
     FilmListView(),
     PeopleListView(),
-    Container(color: StarwarsColors.blue),
+    FavoriteListView(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    widget.favoriteStore.load();
+  }
 
   void changePage(int page) {
     setState(() {
