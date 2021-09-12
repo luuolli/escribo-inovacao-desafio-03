@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 import 'package:starwars/src/features/films/components/film_component.dart';
-import 'package:starwars/src/features/films/services/film_database.dart';
 
 import '../models/models.dart';
 import '../repositories/repositories.dart';
@@ -25,6 +24,7 @@ abstract class _FilmStoreBase with Store {
 extension FilmStoreActions on _FilmStoreBase {
   @action
   Future<void> fetchFilms() async {
+    if (_filmsPagination != null) return;
     _loadingState = ConnectionState.waiting;
     await repo.fetchMovies().then((result) {
       _filmsPagination = result;

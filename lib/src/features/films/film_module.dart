@@ -8,6 +8,6 @@ class FilmModule extends Module {
   List<Bind<Object>> get binds => [
         Bind((i) => FilmDatabase()),
         Bind<IFilmRepository>((i) => FilmRepositoryImpl(customApi: i())),
-        Bind((i) => FilmStore(repo: i()))
+        Bind.singleton((i) => FilmStore(repo: i()))
       ];
 }
