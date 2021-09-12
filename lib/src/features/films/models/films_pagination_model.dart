@@ -5,13 +5,13 @@ import 'film_model.dart';
 class FilmsPagination {
   late final int count;
   late final String? nextPageUrl;
-  late final String? previewPageUrl;
+  late final String? previousPageUrl;
   late final List<Film>? movies;
 
   FilmsPagination({
     required this.count,
     this.nextPageUrl,
-    this.previewPageUrl,
+    this.previousPageUrl,
     this.movies,
   });
 
@@ -19,7 +19,7 @@ class FilmsPagination {
     return FilmsPagination(
       count: map['count'],
       nextPageUrl: map['next'],
-      previewPageUrl: map['preview'],
+      previousPageUrl: map['previous'],
       movies:
           (map['results'] as List).map((movie) => Film.fromMap(movie)).toList(),
     );
@@ -30,7 +30,7 @@ class FilmsPagination {
 
   @override
   String toString() {
-    return 'MoviesPagination(count: $count, nextPageUrl: $nextPageUrl, previewPageUrl: $previewPageUrl, movies: $movies)';
+    return 'MoviesPagination(count: $count, nextPageUrl: $nextPageUrl, previousPageUrl: $previousPageUrl, movies: $movies)';
   }
 
   @override
@@ -40,7 +40,7 @@ class FilmsPagination {
     return other is FilmsPagination &&
         other.count == count &&
         other.nextPageUrl == nextPageUrl &&
-        other.previewPageUrl == previewPageUrl &&
+        other.previousPageUrl == previousPageUrl &&
         other.movies == movies;
   }
 
@@ -48,7 +48,7 @@ class FilmsPagination {
   int get hashCode {
     return count.hashCode ^
         nextPageUrl.hashCode ^
-        previewPageUrl.hashCode ^
+        previousPageUrl.hashCode ^
         movies.hashCode;
   }
 }
