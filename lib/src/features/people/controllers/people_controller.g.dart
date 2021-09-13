@@ -24,6 +24,22 @@ mixin _$PeopleStore on _PeopleStoreBase, Store {
     });
   }
 
+  final _$_loadingMoreStateAtom =
+      Atom(name: '_PeopleStoreBase._loadingMoreState');
+
+  @override
+  ConnectionState get _loadingMoreState {
+    _$_loadingMoreStateAtom.reportRead();
+    return super._loadingMoreState;
+  }
+
+  @override
+  set _loadingMoreState(ConnectionState value) {
+    _$_loadingMoreStateAtom.reportWrite(value, super._loadingMoreState, () {
+      super._loadingMoreState = value;
+    });
+  }
+
   final _$_peoplePaginationAtom =
       Atom(name: '_PeopleStoreBase._peoplePagination');
 

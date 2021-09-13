@@ -19,6 +19,9 @@ abstract class _PeopleStoreBase with Store {
   ConnectionState _loadingState = ConnectionState.none;
 
   @observable
+  ConnectionState _loadingMoreState = ConnectionState.none;
+
+  @observable
   PeoplePagination? _peoplePagination;
 
   @observable
@@ -40,6 +43,27 @@ extension PeopleStoreActions on _PeopleStoreBase {
       },
     );
     _loadingState = ConnectionState.none;
+  }
+
+  @action
+  Future<void> fetchNextPage() async {
+    if (_peoplePagination == null || _peoplePagination!.nextPageUrl == null) {
+      return;
+    }
+
+    _loadingMoreState = ConnectionState.waiting;
+    var regexp = RegExp(r'page=(\d+)');
+    var page = int.parse(
+        regexp.allMatches(_peoplePagination!.nextPageUrl!).first.group(1)!);
+
+    await repo.fetchPeoples(page: page + 1).then((result) {
+      if (result.previewPageUrl != _peoplePagination?.previewPageUrl) {
+        _peoplePagination = result;
+        _peoples?.addAll(_peoplePagination!.peoples!);
+      }
+      _loadingMoreState = ConnectionState.done;
+    });
+    _loadingMoreState = ConnectionState.none;
   }
 
   @action
@@ -86,6 +110,9 @@ extension PeopleStoreActions on _PeopleStoreBase {
 extension PeopleStoreComputeds on _PeopleStoreBase {
   @computed
   ConnectionState get loadingState => _loadingState;
+
+  @computed
+  ConnectionState get loadingMoreState => _loadingMoreState;
 
   @computed
   List<PeopleWidget>? get peopleItemList => _peoples
