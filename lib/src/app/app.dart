@@ -16,7 +16,7 @@ class AppWidget extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/splash',
       theme: ThemeData.dark(),
     ).modular();
   }

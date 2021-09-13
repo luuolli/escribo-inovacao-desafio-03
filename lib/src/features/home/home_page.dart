@@ -84,7 +84,10 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.zero,
                     child: const Icon(Icons.public),
                     onPressed: () {
-                      Modular.to.pushNamed('starwars-web', forRoot: true);
+                      Modular.to.pushNamed(
+                        "../home/starwars-web",
+                        forRoot: true,
+                      );
                     },
                   ),
                   actions: [
