@@ -1,13 +1,13 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:starwars/src/core/core.dart';
-import 'package:starwars/src/features/favorites/controllers/favorite_controller.dart';
-import 'package:starwars/src/features/people/components/people_component.dart';
-import 'package:starwars/src/features/people/models/models.dart';
-import 'package:starwars/src/features/people/repositories/people_repository_interface.dart';
+
+import '../../../core/core.dart';
+import '../../favorites/controllers/favorite_controller.dart';
+import '../components/people_component.dart';
+import '../models/models.dart';
+import '../repositories/repositories.dart';
+
 part 'people_controller.g.dart';
 
 class PeopleStore = _PeopleStoreBase with _$PeopleStore;

@@ -14,9 +14,10 @@ class AppWidget extends StatelessWidget {
       statusBarColor: Colors.transparent,
     ));
 
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
+      theme: ThemeData.dark(),
     ).modular();
   }
 }
