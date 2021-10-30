@@ -6,11 +6,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoPageScaffold(
-      backgroundColor: Colors.amber,
-      child: Center(
-        child: Text("Ola"),
-      ),
+    return CupertinoPageScaffold(
+      child: Container(),
     );
   }
 }
