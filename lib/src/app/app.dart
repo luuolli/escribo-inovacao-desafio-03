@@ -14,9 +14,10 @@ class AppWidget extends StatelessWidget {
       statusBarColor: Colors.transparent,
     ));
 
-    return const CupertinoApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/splash',
+      theme: ThemeData.dark(),
     ).modular();
   }
 }
